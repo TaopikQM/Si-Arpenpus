@@ -1,0 +1,681 @@
+
+					<h2 class="top-tittel">Grafik Pendidikan di Kota Semarang</h2>
+					<div class="book-list">
+						<!--tampilan diagram-->
+
+						<div class="book-card">
+							<div class="top">
+								<a href="<?php echo site_url('DataSd'); ?>"><img src="assets/img/diagram/jmlSd.png" alt="data buku" width="360px"></a>
+							</div>
+
+						</div>
+						<div class="book-card">
+							<div class="top">
+								<a href="<?php echo site_url('DataSmp'); ?>"><img src="assets/img/diagram/jmlSmp.png" alt="data buku" width="360px"></a>
+							</div>
+
+						</div>
+						<div class="book-card">
+							<div class="top">
+								<a href="<?php echo site_url('DataSma'); ?>"><img src="assets/img/diagram/jmlSma.png" alt="data buku" width="360px"></a>
+							</div>
+
+						</div>
+						<!--
+						<div class="book-card">
+							<div class="top">
+								<a href="<php echo site_url('DataSmk'); ?>" ><img src="assets/img/diagram/jmlSmk.png" alt="data buku" width="500px"></a>
+							</div>
+						</div>
+					<!--akhir tampilan diagram-->
+
+						<div class="book-card">
+
+						</div>
+
+
+					</div>
+					<div class="card-body card-padding-sm">
+						<div class="table-responsive">
+							<div id="DataTables_Table_0_wrapper" class=" dataTables_wrapper">
+								<div class="datatable-header">
+									<!--ini adalah kolom pencarian isi tabel-->
+									<div id="DataTables_Table_0_filter" class="dataTables_filter">
+										<label>
+											<h3>Data Buku</h3>
+											<!--<input type="search" class="" placeholder="Masukan kata kunci..." aria-controls="DataTables_Table_0" id="searchInput">-->
+										</label>
+									</div>
+									<div class="dt-buttons">
+										<a class="btn btn-info btn-raised btn-sm buttons-print" tabindex="0" aria-controls="DataTables_Table_SMA" title="Cetak PDF" href="javascript:void(0);" onclick="openPrintPreviewSMA()">
+											<span>
+												<i class=" position-left"><img src="assets/icon/printer.png" alt="icon" width="16px" height="16px"></i>
+											</span>
+										</a>
+									</div>
+								</div>
+								<div class="datatable-scroll-wrap">
+									<table class="table table-hover table-striped dataTable" id="DataTables_Table_SMA" role="grid">
+										<thead>
+											<tr role="row">
+												<th class="text-center sorting_asc" rowspan="2" tabindex="0" aria-controls="DataTables_Table_SMA" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
+												<th class="text-center sorting" rowspan="2" tabindex="0" aria-controls="DataTables_Table_SMA" colspan="1" aria-label="Wilayah: activate to sort column ascending">Cover</th>
+
+												<!--<th class="text-center" colspan="3" rowspan="1">SMA</th>-->
+											</tr>
+											<tr role="row">
+
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_SMA" rowspan="1" colspan="1" aria-label="Judul: activate to sort column ascending">Judul Buku</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_SMA" rowspan="1" colspan="1" aria-label="P: activate to sort column ascending">Pengarang</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_SMA" rowspan="1" colspan="1" aria-label="Pener: activate to sort column ascending">Penerbit</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_SMA" rowspan="1" colspan="1" aria-label="Tahun: activate to sort column ascending">Tahun</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_SMA" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<?php
+											if (!empty($buku)) { ?><!--// Jika data siswa tidak sama dengan kosong, artinya jika data siswa ada-->
+												<?php foreach ($buku as $item) { ?>
+													<tr class='data odd' role='row'>
+														<td class='sorting_1'><?php echo $item->id; ?></td>
+														<td class='tabfoto'><img src="<?php echo base_url('assets/img/uploads/' . $item->foto); ?>" alt="Gambar Buku"> </td>
+
+														<td><?php echo  $item->judul_buku; ?></td>
+														<td> <?php echo $item->pengarang; ?></td>
+														<td><?php echo $item->penerbit; ?></td>
+														<td><?php echo  $item->tahun; ?></td>
+														<td>
+															<button class='btn btn-danger' onclick='deleteData(<?php echo $item->id; ?>)'>Delete</button>
+														</td>
+													</tr>
+												<?php } ?>
+											<?php } else { ?> <!--Jika data siswa kosong-->
+												<tr>
+													<td align='center' colspan='7'>Data Tidak Ada</td>
+												</tr>
+											<?php } ?>
+
+
+										</tbody>
+										<tfoot>
+											<tr>
+
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+								<div class="datatable-footer">
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<!--ini bagian data pendidikan-->
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header border-blue ch-alt">
+									<h2>Data Sekolah</h2>
+									<div class="ch-widget">
+										<div class="form-group">
+											<a>Semester 2022/2023 Genap</a>
+											<!--<select class="form-control" id="selectSemester" title="Pilih Semester">
+										<option value="20222" disabled="">Pilih Semester</option>
+										<option value="20222" selected="">Semester 2022/2023 Genap</option>
+										<option value="20221">Semester 2022/2023 Ganjil</option>
+										<option value="20212">Semester 2021/2022 Genap</option>
+										<option value="20211">Semester 2021/2022 Ganjil</option>
+										<option value="20202">Semester 2020/2021 Genap</option>
+										<option value="20201">Semester 2020/2021 Ganjil</option>
+										<option value="20192">Semester 2019/2020 Genap</option>
+										<option value="20191">Semester 2019/2020 Ganjil</option>
+										 <option value="20182">Semester 2018/2019 Genap</option>
+												<option value="20181">Semester 2018/2019 Ganjil</option>
+												<option value="20172">Semester 2017/2018 Genap</option>
+												<option value="20171">Semester 2017/2018 Ganjil</option>
+												<option value="20162">Semester 2016/2017 Genap</option>
+												<option value="20161">Semester 2016/2017 Ganjil</option>
+												<option value="20152">Semester 2015/2016 Genap</option>
+												<option value="20151">Semester 2015/2016 Ganjil</option>
+												<option value="20142">Semester 2014/2015 Genap</option>
+												<option value="20141">Semester 2014/2015 Ganjil</option> 
+									</select>
+									<span class="material-input"></span>-->
+										</div>
+									</div>
+									<div class="ch-widget" id="div-jenjang" style="display: none;">
+										<div class="form-group is-empty">
+											<select class="form-control" id="selectJenjang" title="Pilih Jenjang">
+												<option value="" disabled="">Pilih Jenjang</option>
+												<option value="">Semua Jenjang</option>
+												<option value="tk">TK</option>
+												<option value="kb">KB</option>
+												<option value="tpa">TPA</option>
+												<option value="sps">SPS</option>
+												<option value="pkbm">PKBM</option>
+												<option value="skb">SKB</option>
+												<option value="sd">SD</option>
+												<option value="smp">SMP</option>
+												<option value="sma">SMA</option>
+												<option value="smk">SMK</option>
+												<option value="slb">SLB</option>
+											</select>
+											<span class="material-input"></span>
+										</div>
+									</div>
+								</div>
+								<div class="card-body card-padding-sm">
+									<div class="table-responsive">
+										<div id="DataTables_Table_0_wrapper" class="dataTables_wrapper">
+											<div class="datatable-header">
+												<div id="DataTables_Table_0_filter" class="dataTables_filter">
+
+												</div>
+												<div class="dt-buttons">
+
+												</div>
+											</div>
+											<div class="datatable-scroll-wrap">
+												<table class="table table-hover table-striped dataTable" id="DataTables_Table_0" role="grid">
+													<thead>
+														<tr role="row">
+															<th class="text-center sorting" rowspan="2" tabindex="0" aria-controls="DataTables_Table_0" colspan="1" aria-label="No: activate to sort column ascending">No</th>
+															<th class="text-center sorting" rowspan="2" tabindex="0" aria-controls="DataTables_Table_0" colspan="1" aria-label="Wilayah: activate to sort column ascending">Wilayah</th>
+															<th class="text-center" colspan="3" rowspan="1">Total</th>
+															<th class="text-center" colspan="3" rowspan="1">TK</th>
+															<th class="text-center" colspan="3" rowspan="1">KB</th>
+															<th class="text-center" colspan="3" rowspan="1">TPA</th>
+															<th class="text-center" colspan="3" rowspan="1">SPS</th>
+															<th class="text-center" colspan="3" rowspan="1">PKBM</th>
+															<th class="text-center" colspan="3" rowspan="1">SKB</th>
+															<th class="text-center" colspan="3" rowspan="1">SD</th>
+															<th class="text-center" colspan="3" rowspan="1">SMP</th>
+															<th class="text-center" colspan="3" rowspan="1">SMA</th>
+															<th class="text-center" colspan="3" rowspan="1">SMK</th>
+															<th class="text-center" colspan="3" rowspan="1">SLB</th>
+															<th class="text-center" colspan="2" rowspan="1">ACTION</th>
+														</tr>
+														<tr role="row">
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Jml: activate to sort column ascending">Jml</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="N: activate to sort column ascending">N</th>
+															<th class="text-right sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="S: activate to sort column ascending" aria-sort="descending">S</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Jml: activate to sort column ascending">Jml</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="N: activate to sort column ascending">N</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="S: activate to sort column ascending">S</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Jml: activate to sort column ascending">Jml</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="N: activate to sort column ascending">N</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="S: activate to sort column ascending">S</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Jml: activate to sort column ascending">Jml</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="N: activate to sort column ascending">N</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="S: activate to sort column ascending">S</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Jml: activate to sort column ascending">Jml</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="N: activate to sort column ascending">N</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="S: activate to sort column ascending">S</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Jml: activate to sort column ascending">Jml</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="N: activate to sort column ascending">N</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="S: activate to sort column ascending">S</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Jml: activate to sort column ascending">Jml</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="N: activate to sort column ascending">N</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="S: activate to sort column ascending">S</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Jml: activate to sort column ascending">Jml</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="N: activate to sort column ascending">N</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="S: activate to sort column ascending">S</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Jml: activate to sort column ascending">Jml</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="N: activate to sort column ascending">N</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="S: activate to sort column ascending">S</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Jml: activate to sort column ascending">Jml</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="N: activate to sort column ascending">N</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="S: activate to sort column ascending">S</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Jml: activate to sort column ascending">Jml</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="N: activate to sort column ascending">N</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="S: activate to sort column ascending">S</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Jml: activate to sort column ascending">Jml</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="N: activate to sort column ascending">N</th>
+															<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="S: activate to sort column ascending">S</th>
+														</tr>
+													</thead>
+													<tbody>
+														<?php
+														if (!empty($datasekolah)) { ?> <!-- Jika data siswa tidak sama dengan kosong, artinya jika data siswa ada-->
+															<?php foreach ($datasekolah as $data) { ?>
+																<tr class='data odd' role='row'>
+																	<td class='sorting_1'><?php echo $data->no ?></td>
+																	<td><?php echo $data->wilayah ?></td>
+																	<td><?php echo $data->Tjml ?></td>
+																	<td><?php echo $data->TN ?></td>
+																	<td><?php echo $data->TS ?></td>
+																	<td><?php echo $data->jmlTk ?></td>
+																	<td><?php echo $data->NTk ?></td>
+																	<td><?php echo $data->STk ?></td>
+																	<td><?php echo $data->jmlKb ?></td>
+																	<td><?php echo $data->NKb ?></td>
+																	<td><?php echo $data->SKb ?></td>
+																	<td><?php echo $data->jmlTpa ?></td>
+																	<td><?php echo $data->NTpa ?></td>
+																	<td><?php echo $data->STpa ?></td>
+																	<td><?php echo $data->jmlSps ?></td>
+																	<td><?php echo $data->NSps ?></td>
+																	<td><?php echo $data->SSps ?></td>
+																	<td><?php echo $data->jmlPkbm ?></td>
+																	<td><?php echo $data->NPkmbm ?></td>
+																	<td><?php echo $data->SPkbm ?></td>
+																	<td><?php echo $data->jmlSkb ?></td>
+																	<td><?php echo $data->NSkb ?></td>
+																	<td><?php echo $data->SSkb ?></td>
+																	<td><?php echo $data->jmlSd ?></td>
+																	<td><?php echo $data->NSd ?></td>
+																	<td><?php echo $data->SSd ?></td>
+																	<td><?php echo $data->jmlSmp ?></td>
+																	<td><?php echo $data->NSmp ?></td>
+																	<td><?php echo $data->SSmp ?></td>
+																	<td><?php echo $data->jmlSma ?></td>
+																	<td><?php echo $data->NSma ?></td>
+																	<td><?php echo $data->SSma ?></td>
+																	<td><?php echo $data->jmlSmk ?></td>
+																	<td><?php echo $data->NSmk ?></td>
+																	<td><?php echo $data->SSmk ?></td>
+																	<td><?php echo $data->jmlSlb ?></td>
+																	<td><?php echo $data->NSlb ?></td>
+																	<td><?php echo $data->SSlb ?></td>
+																	<td>
+																		<button class='btn btn-danger' onclick='deleteDataPend(<?php echo $item->id; ?>)'>Delete</button>
+																	</td>
+																</tr>
+															<?php } ?>
+														<?php } else { ?> <!--Jika data siswa kosong-->
+															<tr>
+																<td align='center' colspan='7'>Data Tidak Ada</td>
+															</tr>
+														<?php } ?>
+
+													</tbody>
+													<tfoot>
+														<tr>
+															<td class="text-center" colspan="2" rowspan="1"><strong>Total</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>2.230</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>412</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>1.818</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>702</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>11</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>691</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>291</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>0</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>291</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>30</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>0</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>30</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>277</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>0</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>277</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>39</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>0</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>39</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>1</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>1</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>0</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>510</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>325</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>185</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>200</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>46</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>154</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>75</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>16</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>59</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>89</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>12</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>77</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>16</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>1</strong></td>
+															<td class="text-right" rowspan="1" colspan="1"><strong>15</strong></td>
+														</tr>
+													</tfoot>
+												</table>
+											</div>
+											<div class="datatable-footer"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--data staf-->
+					<div class="card-body card-padding-sm">
+						<div class="table-responsive">
+							<div id="DataTables_Table_0_wrapper" class=" dataTables_wrapper">
+								<div class="datatable-header">
+									<!--ini adalah kolom pencarian isi tabel-->
+									<div id="DataTables_Table_0_filter" class="dataTables_filter">
+										<label>
+											<h3>Data staf</h3>
+											<!--<input type="search" class="" placeholder="Masukan kata kunci..." aria-controls="DataTables_Table_0" id="searchInput">-->
+										</label>
+									</div>
+								</div>
+								<div class="datatable-scroll-wrap">
+									<table class="table table-hover table-striped dataTable" id="DataTables_Table_SMA" role="grid">
+										<thead>
+											<tr role="row">
+												<th class="text-center sorting_asc" rowspan="2" tabindex="0" aria-controls="DataTables_Table" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
+												<th class="text-center sorting" rowspan="2" tabindex="0" aria-controls="DataTables_Table" colspan="1" aria-label="Wilayah: activate to sort column ascending">Nama</th>
+
+												<!--<th class="text-center" colspan="3" rowspan="1">SMA</th>-->
+											</tr>
+											<tr role="row">
+
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Judul: activate to sort column ascending">Email</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="P: activate to sort column ascending">Pass</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Pener: activate to sort column ascending">Tempat Kerja</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Tahun: activate to sort column ascending">Peran</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<?php
+											if (!empty($dbstaf)) { ?><!--// Jika data siswa tidak sama dengan kosong, artinya jika data siswa ada-->
+												<?php foreach ($dbstaf as $item) { ?>
+													<tr class='data odd' role='row'>
+														<td class='sorting_1'><?php echo $item->id; ?></td>
+
+														<td><?php echo  $item->nama; ?></td>
+														<td> <?php echo $item->email; ?></td>
+														<td><?php echo $item->password; ?></td>
+														<td><?php echo  $item->tempat_kerja; ?></td>
+														<td><?php echo  $item->peran; ?></td>
+														<td>
+															<button class='btn btn-danger' onclick='deleteDataStaf(<?php echo $item->id; ?>)'>Delete</button>
+														</td>
+													</tr>
+												<?php } ?>
+											<?php } else { ?> <!--Jika data siswa kosong-->
+												<tr>
+													<td align='center' colspan='7'>Data Tidak Ada</td>
+												</tr>
+											<?php } ?>
+
+
+										</tbody>
+										<tfoot>
+											<tr>
+
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+								<div class="datatable-footer">
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--data umum-->
+					<div class="card-body card-padding-sm">
+						<div class="table-responsive">
+							<div id="DataTables_Table_0_wrapper" class=" dataTables_wrapper">
+								<div class="datatable-header">
+									<!--ini adalah kolom pencarian isi tabel-->
+									<div id="DataTables_Table_0_filter" class="dataTables_filter">
+										<label>
+											<h3>Data Umum</h3>
+											<!--<input type="search" class="" placeholder="Masukan kata kunci..." aria-controls="DataTables_Table_0" id="searchInput">-->
+										</label>
+									</div>
+								</div>
+								<div class="datatable-scroll-wrap">
+									<table class="table table-hover table-striped dataTable" id="DataTables_Table_SMA" role="grid">
+										<thead>
+											<tr role="row">
+												<th class="text-center sorting_asc" rowspan="2" tabindex="0" aria-controls="DataTables_Table" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
+												<th class="text-center sorting" rowspan="2" tabindex="0" aria-controls="DataTables_Table" colspan="1" aria-label="Wilayah: activate to sort column ascending">Nama</th>
+
+												<!--<th class="text-center" colspan="3" rowspan="1">SMA</th>-->
+											</tr>
+											<tr role="row">
+
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Judul: activate to sort column ascending">Email</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="P: activate to sort column ascending">Pass</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Tahun: activate to sort column ascending">Peran</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<?php
+											if (!empty($dbpenumum)) { ?><!--// Jika data siswa tidak sama dengan kosong, artinya jika data siswa ada-->
+												<?php foreach ($dbpenumum as $item) { ?>
+													<tr class='data odd' role='row'>
+														<td class='sorting_1'><?php echo $item->id; ?></td>
+
+														<td><?php echo  $item->nama; ?></td>
+														<td> <?php echo $item->email; ?></td>
+														<td><?php echo $item->password; ?></td>
+														<td><?php echo  $item->peran; ?></td>
+														<td>
+															<button class='btn btn-danger' onclick='deleteDataUmum(<?php echo $item->id; ?>)'>Delete</button>
+														</td>
+													</tr>
+												<?php } ?>
+											<?php } else { ?> <!--Jika data siswa kosong-->
+												<tr>
+													<td align='center' colspan='7'>Data Tidak Ada</td>
+												</tr>
+											<?php } ?>
+
+
+										</tbody>
+										<tfoot>
+											<tr>
+
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+								<div class="datatable-footer">
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--data admin-->
+					<div class="card-body card-padding-sm">
+						<div class="table-responsive">
+							<div id="DataTables_Table_0_wrapper" class=" dataTables_wrapper">
+								<div class="datatable-header">
+									<!--ini adalah kolom pencarian isi tabel-->
+									<div id="DataTables_Table_0_filter" class="dataTables_filter">
+										<label>
+											<h3>Data admin</h3>
+											<!--<input type="search" class="" placeholder="Masukan kata kunci..." aria-controls="DataTables_Table_0" id="searchInput">-->
+										</label>
+									</div>
+								</div>
+								<div class="datatable-scroll-wrap">
+									<table class="table table-hover table-striped dataTable" id="DataTables_Table_SMA" role="grid">
+										<thead>
+											<tr role="row">
+												<th class="text-center sorting_asc" rowspan="2" tabindex="0" aria-controls="DataTables_Table" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
+												<th class="text-center sorting" rowspan="2" tabindex="0" aria-controls="DataTables_Table" colspan="1" aria-label="Wilayah: activate to sort column ascending">Nama</th>
+
+												<!--<th class="text-center" colspan="3" rowspan="1">SMA</th>-->
+											</tr>
+											<tr role="row">
+
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Judul: activate to sort column ascending">Email</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="P: activate to sort column ascending">Pass</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Pener: activate to sort column ascending">jabatan</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Tahun: activate to sort column ascending">nip</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Tahun: activate to sort column ascending">Peran</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<?php
+											if (!empty($dbadmin)) { ?><!--// Jika data siswa tidak sama dengan kosong, artinya jika data siswa ada-->
+												<?php foreach ($dbadmin as $item) { ?>
+													<tr class='data odd' role='row'>
+														<td class='sorting_1'><?php echo $item->id; ?></td>
+
+														<td><?php echo  $item->nama; ?></td>
+														<td> <?php echo $item->email; ?></td>
+														<td><?php echo $item->password; ?></td>
+														<td><?php echo  $item->jabatan; ?></td>
+														<td><?php echo  $item->nip; ?></td>
+														<td><?php echo  $item->peran; ?></td>
+														<td>
+															<button class='btn btn-danger' onclick='deleteDataAdmin(<?php echo $item->id; ?>)'>Delete</button>
+														</td>
+													</tr>
+												<?php } ?>
+											<?php } else { ?> <!--Jika data siswa kosong-->
+												<tr>
+													<td align='center' colspan='7'>Data Tidak Ada</td>
+												</tr>
+											<?php } ?>
+
+
+										</tbody>
+										<tfoot>
+											<tr>
+
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+								<div class="datatable-footer">
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--data Chat-->
+					<div class="card-body card-padding-sm">
+						<div class="table-responsive">
+							<div id="DataTables_Table_0_wrapper" class=" dataTables_wrapper">
+								<div class="datatable-header">
+									<!--ini adalah kolom pencarian isi tabel-->
+									<div id="DataTables_Table_0_filter" class="dataTables_filter">
+										<label>
+											<h3>Data chat</h3>
+											<!--<input type="search" class="" placeholder="Masukan kata kunci..." aria-controls="DataTables_Table_0" id="searchInput">-->
+										</label>
+									</div>
+								</div>
+								<div class="datatable-scroll-wrap">
+									<table class="table table-hover table-striped dataTable" id="DataTables_Table_SMA" role="grid">
+										<thead>
+											<tr role="row">
+												<th class="text-center sorting_asc" rowspan="2" tabindex="0" aria-controls="DataTables_Table" colspan="1" aria-sort="ascending" aria-label="No: activate to sort column descending">No</th>
+												<th class="text-center sorting" rowspan="2" tabindex="0" aria-controls="DataTables_Table" colspan="1" aria-label="Wilayah: activate to sort column ascending">Send</th>
+
+												<!--<th class="text-center" colspan="3" rowspan="1">SMA</th>-->
+											</tr>
+											<tr role="row">
+
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Judul: activate to sort column ascending">Recevied</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="P: activate to sort column ascending">Pesan</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Pener: activate to sort column ascending">Times</th>
+												<th class="text-right sorting" tabindex="0" aria-controls="DataTables_Table" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+
+											<?php
+											if (!empty($chat)) { ?><!--// Jika data siswa tidak sama dengan kosong, artinya jika data siswa ada-->
+												<?php foreach ($chat as $item) { ?>
+													<tr class='data odd' role='row'>
+														<td class='sorting_1'><?php echo $item->id; ?></td>
+
+														<td><?php echo  $item->sender_id; ?></td>
+														<td> <?php echo $item->receiver_id; ?></td>
+														<td><?php echo $item->message; ?></td>
+														<td><?php echo  $item->timestamp; ?></td>
+														<td>
+															<button class='btn btn-danger' onclick='deleteDataChat(<?php echo $item->id; ?>)'>Delete</button>
+														</td>
+													</tr>
+												<?php } ?>
+											<?php } else { ?> <!--Jika data siswa kosong-->
+												<tr>
+													<td align='center' colspan='7'>Data Tidak Ada</td>
+												</tr>
+											<?php } ?>
+
+
+										</tbody>
+										<tfoot>
+											<tr>
+
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+								<div class="datatable-footer">
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					function openPrintPreviewSMA() {
+    // Buka halaman baru menggunakan window.open()
+    var printWindow = window.open("", "_blank");
+  
+    // Buat konten HTML baru untuk halaman cetak
+    var printContent = "<html><head><title>Cetak SMA</title></head><body>";
+    
+    // Tambahkan judul halaman cetak
+    printContent += "<h1>Data Pendidikan SMA</h1>";
+  
+    // Mendapatkan referensi ke tabel atau data yang ingin dicetak
+    var table = document.getElementById("DataTables_Table_SMA"); // Ganti dengan ID tabel yang sesuai
+    
+    // Mendapatkan HTML dari tabel
+    var tableHTML = table.outerHTML;
+  
+    // Tambahkan HTML tabel ke konten cetak
+    printContent += tableHTML;
+  
+    // Tambahkan script untuk otomatis memicu cetak
+    printContent += "<script>window.onload = function() { window.print(); };</script>";
+    
+    printContent += "</body></html>";
+  
+    // Set konten HTML ke halaman cetak baru
+    printWindow.document.open();
+    printWindow.document.write(printContent);
+    printWindow.document.close();
+  }
